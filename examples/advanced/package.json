@@ -1,0 +1,12 @@
+{
+  "name": "advanced",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build"
+  },
+  "docy": {
+    "title": "Advanced Example",
+    "single": false
+  }
+}

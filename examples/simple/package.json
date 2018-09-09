@@ -1,0 +1,8 @@
+{
+  "name": "simple",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build"
+  }
+}

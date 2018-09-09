@@ -1,0 +1,59 @@
+<% function renderNavigation(entries) { %>
+  <% if (entries && entries.length) { %>
+    <% entries.forEach(function(group) { %>
+      <li>
+        <a href="<%= group.link %>">
+          <%= group.name %>
+        </a>
+      </li>
+      <% if (group.entries) { %>
+        <ul>
+          <%= renderNavigation(group.entries) %>
+        </ul>
+      <% } %>
+    <% }) %>
+  <% } %>
+<% } %>
+
+<% function renderContent(entries) { %>
+  <% if (entries && entries.length) { %>
+    <% entries.forEach(function(group) { %>
+      <section>
+        <% if (!group.html) { %>
+          <h1 id="<%= group.id %>"><%= group.name %></h1>
+        <% } %>
+        <%- group.html %>
+        <% if (group.entries) { %>
+          <%= renderContent(group.entries) %>
+        <% } %>
+      </section>
+    <% }) %>
+  <% } %>
+<% } %>
+
+<html>
+    <head>
+        <title><%= title %></title>
+        <style><%= style %></style>
+    </head>
+    <body>
+        <header>
+            <h1><%= title %></h1>
+        </header>
+        <div class="row">
+          <aside>
+            <nav>
+                <ul>
+                  <%= renderNavigation(structure) %>
+                </ul>
+            </nav>
+          </aside>
+          <article>
+            <%= renderContent(substructure) %>
+          </article>
+        </div>
+        <footer>
+            <%- footer %>
+        </footer>
+    </body>
+</html>

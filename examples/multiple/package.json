@@ -1,0 +1,11 @@
+{
+  "name": "multiple",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build"
+  },
+  "docy": {
+    "single": false
+  }
+}
