@@ -4,5 +4,8 @@
     "start": "docy",
     "develop": "docy --watch --open",
     "build": "docy --build"
+  },
+  "dependencies": {
+    "docy": "^1.0.2"
   }
 }

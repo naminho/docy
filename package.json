@@ -1,6 +1,6 @@
 {
   "name": "docy",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Documentation generator for your plugin, library or framework.",
   "main": "index.js",
   "bin": {

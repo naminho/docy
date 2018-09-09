@@ -7,5 +7,8 @@
   },
   "docy": {
     "single": false
+  },
+  "dependencies": {
+    "docy": "^1.0.2"
   }
 }

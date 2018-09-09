@@ -8,5 +8,8 @@
   "docy": {
     "title": "Advanced Example",
     "single": false
+  },
+  "dependencies": {
+    "docy": "^1.0.2"
   }
 }

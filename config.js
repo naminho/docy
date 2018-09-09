@@ -2,12 +2,16 @@ const contentDirectory = process.cwd()
 const docyDirectory = __dirname
 
 const path = require('path')
-const package = require(path.resolve(contentDirectory, 'package.json'))
+const exmplPath = require.resolve('exmpl')
+let package = {}
+try {
+  package = require(path.resolve(contentDirectory, 'package.json'))
+} catch (error) {}
 const options = package.docy || {}
 
 const defaults = {
   styles: [
-    'node_modules/exmpl/dist/styles-opt-out-no-layout.css',
+    path.join(exmplPath, '../styles-opt-out-no-layout.css'),
     'styles/layout.css',
     'styles/header.css',
     'styles/navigation.css',
