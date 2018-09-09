@@ -6,6 +6,7 @@
   "bin": {
     "docy": "./index.js"
   },
+  "repository": "github:naminho/docy",
   "author": "Matthias Giger",
   "license": "MIT",
   "dependencies": {
