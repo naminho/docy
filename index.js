@@ -4,7 +4,10 @@ const contentDirectory = process.cwd()
 
 const path = require('path')
 const program = require('commander')
-const package = require(path.resolve(contentDirectory, 'package.json'))
+let package = {}
+try {
+  package = require(path.resolve(contentDirectory, 'package.json'))
+} catch(error) {}
 const render = require('./src/render')
 const prompt = require('./src/prompt')
 const watch = require('./src/watch')

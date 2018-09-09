@@ -4,6 +4,6 @@
     "start": "docy"
   },
   "dependencies": {
-    "docy": "^1.0.2"
+    "docy": "^1.0.3"
   }
 }
