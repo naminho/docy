@@ -24,7 +24,7 @@ const defaults = {
   contentDirectory,
   docyDirectory,
   title: package.name,
-  footer: `Documentation generated with <a href="http://github.com/naminho/docy">docy</a>.`,
+  footer: `Documentation generated with <a href="http://github.com/tobua/docy">docy</a>.`,
   single: true,
   minify: true,
   fileNamePlaceholder: '[name]',

@@ -3,12 +3,13 @@
   "scripts": {
     "start": "docy",
     "develop": "docy --watch --open",
-    "build": "docy --build"
+    "build": "docy --build",
+    "local": "npm install --no-save $(npm pack ../.. | tail -1)"
   },
   "docy": {
     "single": false
   },
   "dependencies": {
-    "docy": "^1.0.3"
+    "docy": "^1.0.4"
   }
 }

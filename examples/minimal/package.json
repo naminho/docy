@@ -1,9 +1,10 @@
 {
   "name": "minimal",
   "scripts": {
-    "start": "docy"
+    "start": "docy",
+    "local": "npm install --no-save $(npm pack ../.. | tail -1)"
   },
   "dependencies": {
-    "docy": "^1.0.3"
+    "docy": "^1.0.4"
   }
 }
