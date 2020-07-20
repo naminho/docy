@@ -3,7 +3,7 @@
 const contentDirectory = process.cwd()
 
 const path = require('path')
-const program = require('commander')
+const { program } = require('commander')
 let package = {}
 try {
   package = require(path.resolve(contentDirectory, 'package.json'))
@@ -15,7 +15,7 @@ const open = require('./src/open')
 
 // Generate CLI
 program
-  .version(package.version)
+  .version(package.version || '0.0.0')
   .option('-b, --build', 'Build only, no watch and open.')
   .option('-w, --watch', 'Watch filesystem for changes.')
   .option('-o, --open', 'Open the generated documentation in the browser.')
