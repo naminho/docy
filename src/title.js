@@ -8,9 +8,7 @@ const readable = require('./utils/readable')
  **/
 module.exports = (content, file) => {
   // Get an MDAST from the markdown file: https://github.com/syntax-tree/mdast
-  const tree = unified()
-    .use(markdown)
-    .parse(content)
+  const tree = unified().use(markdown).parse(content)
 
   // Check a node to see if it's a heading and if not continue walking the tree.
   const walkTree = (node) => {

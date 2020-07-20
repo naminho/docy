@@ -16,7 +16,7 @@ const writeTemplate = (error, result, structure) => {
 
   if (config.minify) {
     result = minify(result, {
-      collapseWhitespace: true
+      collapseWhitespace: true,
     })
   }
 
@@ -25,15 +25,16 @@ const writeTemplate = (error, result, structure) => {
   fs.writeFileSync(path.join(config.dist, distFileName), result)
 }
 
-module.exports = (structure, substructure) => ejs.renderFile(
-  config.templatePath,
-  {
-    title: config.title,
-    footer: config.footer,
-    structure,
-    substructure: substructure || structure,
-    style
-  },
-  {},
-  (error, result) => writeTemplate(error, result, substructure || structure)
-)
+module.exports = (structure, substructure) =>
+  ejs.renderFile(
+    config.templatePath,
+    {
+      title: config.title,
+      footer: config.footer,
+      structure,
+      substructure: substructure || structure,
+      style,
+    },
+    {},
+    (error, result) => writeTemplate(error, result, substructure || structure)
+  )

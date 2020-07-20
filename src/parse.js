@@ -13,7 +13,7 @@ module.exports = (content, depth) => {
     .use(slug)
     .use(headings)
     .use(behead, {
-      depth
+      depth,
     })
     .use(highlight)
     .use(html)

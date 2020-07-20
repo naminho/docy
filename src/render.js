@@ -29,8 +29,7 @@ const templates = (structure, substructure) => {
   // Top level => continue recursion
   if (substructure instanceof Array && substructure[0].depth === 1) {
     substructure.forEach((group, index) => setDistFilename(group, index === 0))
-    return substructure.forEach(group => templates(structure, group)
-    )
+    return substructure.forEach((group) => templates(structure, group))
   }
 
   // Generate template only after recursion has added necessary info everywhere.

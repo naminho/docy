@@ -7,7 +7,8 @@ module.exports = (watch, open) => {
     questions.push({
       type: 'confirm',
       name: 'open',
-      message: 'Do you want to open the generated documentation in the browser?'
+      message:
+        'Do you want to open the generated documentation in the browser?',
     })
   }
 
@@ -15,22 +16,25 @@ module.exports = (watch, open) => {
     questions.push({
       type: 'confirm',
       name: 'watch',
-      message: 'Do you to watch for changes?'
+      message: 'Do you to watch for changes?',
     })
   }
 
   const promise = new Promise((resolve, reject) => {
-    inquirer.prompt(questions).then(answers => {
-      if (watch) {
-        answers.watch = watch
-      }
+    inquirer.prompt(questions).then(
+      (answers) => {
+        if (watch) {
+          answers.watch = watch
+        }
 
-      if (open) {
-        answers.open = open
-      }
+        if (open) {
+          answers.open = open
+        }
 
-      resolve(answers)
-    }, error => reject(error))
+        resolve(answers)
+      },
+      (error) => reject(error)
+    )
   })
 
   return promise

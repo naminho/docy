@@ -3,20 +3,21 @@ const chalk = require('chalk')
 const messages = {
   start: {
     text: 'Generating documentation.',
-    type: 'info'
+    type: 'info',
   },
   end: {
     text: 'Documentation successfully generated.',
-    type: 'info'
+    type: 'info',
   },
   template: {
     text: 'An error occurred while compiling the template.',
-    type: 'error'
+    type: 'error',
   },
   title: {
-    text: filename => `The file ${filename} does not contain a title, like # Title.`,
-    type: 'error'
-  }
+    text: (filename) =>
+      `The file ${filename} does not contain a title, like # Title.`,
+    type: 'error',
+  },
 }
 
 const getText = (message, args) => {

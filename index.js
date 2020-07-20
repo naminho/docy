@@ -7,7 +7,7 @@ const { program } = require('commander')
 let package = {}
 try {
   package = require(path.resolve(contentDirectory, 'package.json'))
-} catch(error) {}
+} catch (error) {}
 const render = require('./src/render')
 const prompt = require('./src/prompt')
 const watch = require('./src/watch')
@@ -28,14 +28,17 @@ if (program.build) {
 // Ask if watch and open are desired, then render.
 const promptmise = prompt(program.watch, program.open)
 
-promptmise.then((answers) => {
-  if (answers.watch) {
-    watch()
-  }
+promptmise.then(
+  (answers) => {
+    if (answers.watch) {
+      watch()
+    }
 
-  render()
+    render()
 
-  if (answers.open) {
-    open()
-  }
-}, () => {})
+    if (answers.open) {
+      open()
+    }
+  },
+  () => {}
+)

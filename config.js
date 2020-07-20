@@ -16,7 +16,7 @@ const defaults = {
     'styles/header.css',
     'styles/navigation.css',
     'styles/article.css',
-    'styles/footer.css'
+    'styles/footer.css',
   ],
   result: 'index.html',
   template: 'template.html',
@@ -27,17 +27,21 @@ const defaults = {
   footer: `Documentation generated with <a href="http://github.com/naminho/docy">docy</a>.`,
   single: true,
   minify: true,
-  fileNamePlaceholder: '[name]'
+  fileNamePlaceholder: '[name]',
 }
 
-const config =  Object.assign(defaults, options)
+const config = Object.assign(defaults, options)
 
 // Derived properties
 config.templatePath = path.resolve(docyDirectory, config.template)
-if (!config.single && config.result.indexOf(config.fileNamePlaceholder) === -1) {
+if (
+  !config.single &&
+  config.result.indexOf(config.fileNamePlaceholder) === -1
+) {
   // Replace everything before the extension with the placeholder
-  config.result = config.fileNamePlaceholder
-    + config.result.substr(config.result.lastIndexOf('.'), config.result.length)
+  config.result =
+    config.fileNamePlaceholder +
+    config.result.substr(config.result.lastIndexOf('.'), config.result.length)
 }
 
 module.exports = config

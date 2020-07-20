@@ -22,10 +22,7 @@ const enhance = (entry, parent) => {
   if (!config.single) {
     if (entry.depth === 1) {
       // If multiple files are configured the top level items get their own file.
-      entry.dist = config.result.replace(
-        config.fileNamePlaceholder,
-        entry.id
-      )
+      entry.dist = config.result.replace(config.fileNamePlaceholder, entry.id)
       entry.link = entry.dist
     } else {
       // Contents are found in the top-level file.
@@ -36,7 +33,7 @@ const enhance = (entry, parent) => {
 
   // Continue recursion if there are subentries.
   if (entry.entries instanceof Array) {
-    entry.entries.forEach(item => enhance(item, entry))
+    entry.entries.forEach((item) => enhance(item, entry))
   }
 }
 
@@ -50,7 +47,7 @@ const createEntryForFolder = (folders, entry) => {
     name: groupName,
     id: slugger.slug(groupName),
     entries: [entry],
-    depth: folders.length
+    depth: folders.length,
   }
 }
 
@@ -58,7 +55,7 @@ const createEntryForFolder = (folders, entry) => {
  * Helper to find elements by the name property in an array.
  **/
 const findByName = (values, name) => {
-  return values.filter(value => value.name === name)[0]
+  return values.filter((value) => value.name === name)[0]
 }
 
 /**
@@ -90,14 +87,16 @@ const place = (structure, folders, entry, previousEntry) => {
 }
 
 module.exports = () => {
-  let entries = glob.sync(['**/*.md'], {
-    ignore: ['node_modules']
-  }).sort() // Sort, otherwise files come before folders
+  let entries = glob
+    .sync(['**/*.md'], {
+      ignore: ['node_modules'],
+    })
+    .sort() // Sort, otherwise files come before folders
 
   const structure = []
 
-  entries.forEach(file => {
-    const content = fs.readFileSync(file, {encoding: 'utf8'})
+  entries.forEach((file) => {
+    const content = fs.readFileSync(file, { encoding: 'utf8' })
     const folders = file.split('/').slice(0, -1).map(readable)
     const depth = file.split('/').length
     const name = title(content, file)
@@ -107,7 +106,7 @@ module.exports = () => {
       name,
       source: content,
       depth: folders.length + 1,
-      html: parse(content, depth)
+      html: parse(content, depth),
     }
 
     place(structure, folders, entry, entry)
@@ -118,7 +117,7 @@ module.exports = () => {
   }
 
   // Add dist files and links.
-  structure.forEach(group => enhance(group))
+  structure.forEach((group) => enhance(group))
 
   return structure
 }

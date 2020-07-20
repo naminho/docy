@@ -8,7 +8,7 @@ const removeOrderingRegex = /[^a-zA-Z]+(.+)/
  *
  * intro.md => intro
  **/
-const removeExtension = name => {
+const removeExtension = (name) => {
   const regexResult = removeExtensionRegex.exec(name)
 
   if (regexResult && regexResult[1]) {
@@ -23,7 +23,7 @@ const removeExtension = name => {
  *
  * 1-intro => intro
  **/
-const removeOrdering = name => {
+const removeOrdering = (name) => {
   const regexResult = removeOrderingRegex.exec(name)
 
   if (regexResult && regexResult[1]) {
@@ -43,7 +43,7 @@ const removeOrdering = name => {
  * Capitalizes the title
  * hello-to-the-world => Hello to the World
  **/
-module.exports = name => {
+module.exports = (name) => {
   name = removeOrdering(name)
   name = removeExtension(name)
   name = name.replace('-', ' ')

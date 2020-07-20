@@ -39,6 +39,10 @@
     "config.js",
     "template.html"
   ],
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
   "devDependencies": {
     "prettier": "^2.0.5"
   }
