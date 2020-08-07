@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/tobua/docy/raw/master/logo.png" alt="docy" height="300">
+</p>
+
 # docy
 
 Documentation generator for your plugin, library or framework.
@@ -18,7 +22,7 @@ You'll be asked whether you want open the result in the browser and watch for ch
 
 To get started set up a `package.json` in the folder where you want to keep the documentation.
 
-```
+```json
 {
   "name": "my-documentation",
   "scripts": {
@@ -84,7 +88,7 @@ to install run `npm i docy`.
 
 The plugin can be configured by setting options in the `package.json` file.
 
-```
+```json
 {
   "name": "my-documentation",
   "scripts": {
