@@ -5,7 +5,6 @@ const config = require('./../config')
 const title = require('./title')
 const parse = require('./parse')
 const readable = require('./utils/readable')
-const contentDirectory = process.cwd()
 const slugger = new GithubSlugger()
 
 /**

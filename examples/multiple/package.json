@@ -10,6 +10,6 @@
     "single": false
   },
   "dependencies": {
-    "docy": "^1.0.4"
+    "docy": "^1.0.5"
   }
 }

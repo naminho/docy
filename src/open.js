@@ -1,5 +1,3 @@
-const path = require('path')
-const opn = require('opn')
 const live = require('live-server')
 const config = require('./../config')
 

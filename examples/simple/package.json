@@ -7,6 +7,6 @@
     "local": "npm install --no-save $(npm pack ../.. | tail -1)"
   },
   "dependencies": {
-    "docy": "^1.0.4"
+    "docy": "^1.0.5"
   }
 }

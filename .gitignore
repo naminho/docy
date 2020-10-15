@@ -3,3 +3,4 @@ package-lock.json
 examples/*/package-lock.json
 examples/*/dist
 .DS_Store
+jsconfig.json
