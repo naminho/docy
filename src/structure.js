@@ -1,15 +1,14 @@
-const glob = require('fast-glob')
-const fs = require('fs')
-const GithubSlugger = require('github-slugger')
-const config = require('./../config')
-const title = require('./title')
-const parse = require('./parse')
-const readable = require('./utils/readable')
+import { readFileSync } from 'fs'
+import glob from 'fast-glob'
+import GithubSlugger from 'github-slugger'
+import config from '../config.js'
+import title from './title.js'
+import parse from './parse.js'
+import readable from './utils/readable.js'
+
 const slugger = new GithubSlugger()
 
-/**
- * Recursively add links and dist files to the entries in the structure.
- **/
+// Recursively add links and dist files to the entries in the structure.
 const enhance = (entry, parent) => {
   if (!entry) {
     return
@@ -36,9 +35,7 @@ const enhance = (entry, parent) => {
   }
 }
 
-/**
- * Creates an entry stub for a folder.
- **/
+// Creates an entry stub for a folder.
 const createEntryForFolder = (folders, entry) => {
   slugger.reset()
   const groupName = folders[folders.length - 1]
@@ -50,16 +47,11 @@ const createEntryForFolder = (folders, entry) => {
   }
 }
 
-/**
- * Helper to find elements by the name property in an array.
- **/
-const findByName = (values, name) => {
-  return values.filter((value) => value.name === name)[0]
-}
+// Helper to find elements by the name property in an array.
+const findByName = (values, name) =>
+  values.filter((value) => value.name === name)[0]
 
-/**
- * Place the entry at the appropriate place inside the structure.
- **/
+// Place the entry at the appropriate place inside the structure.
 const place = (structure, folders, entry, previousEntry) => {
   // There are folders, add stubs for them first.
   if (folders.length) {
@@ -78,24 +70,24 @@ const place = (structure, folders, entry, previousEntry) => {
     return place(structure, foldersWithoutLastItem, entry, group)
   }
 
-  let group = findByName(structure, previousEntry.name)
+  const group = findByName(structure, previousEntry.name)
 
   if (!group) {
     structure.push(previousEntry)
   }
 }
 
-module.exports = () => {
-  let entries = glob
+export default () => {
+  const entries = glob
     .sync(['**/*.md'], {
-      ignore: ['node_modules'],
+      ignore: ['node_modules', config.dist],
     })
     .sort() // Sort, otherwise files come before folders
 
   const structure = []
 
   entries.forEach((file) => {
-    const content = fs.readFileSync(file, { encoding: 'utf8' })
+    const content = readFileSync(file, { encoding: 'utf8' })
     const folders = file.split('/').slice(0, -1).map(readable)
     const depth = file.split('/').length
     const name = title(content, file)

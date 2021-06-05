@@ -6,14 +6,22 @@
 
 Documentation generator for your plugin, library or framework.
 
-## Quick Start
+## Quick Start from Template
+
+```
+# In current folder
+npm init now docy
+# Specific folder
+npm init now docy my-documentation
+```
+
+## One-time Installation
 
 The get started quickly create one or more Markdown `.md` files and inside that
 folder run the following from the console having [node](http://nodejs.org) installed:
 
 ```
-npm install -g docy
-docy
+npx -y docy
 ```
 
 You'll be asked whether you want open the result in the browser and watch for changes.

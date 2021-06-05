@@ -1,7 +1,7 @@
-const live = require('live-server')
-const config = require('./../config')
+import live from 'live-server'
+import config from '../config.js'
 
-module.exports = () => {
+export default () => {
   live.start({
     root: `./${config.dist}`,
     open: true,

@@ -1,11 +1,10 @@
-const fs = require('fs')
-const config = require('./../config')
-const log = require('./log')
-const template = require('./template')
+import { mkdirSync, existsSync } from 'fs'
+import config from '../config.js'
+import log from './log.js'
+import template from './template.js'
+import createStructure from './structure.js'
 
-/**
- * Set the dist filename if multiple files to be generated.
- **/
+// Set the dist filename if multiple files to be generated.
 const setDistFilename = (structure, first) => {
   if (!config.single) {
     if (first) {
@@ -18,10 +17,8 @@ const setDistFilename = (structure, first) => {
   }
 }
 
-/**
- * Recursively generates a template for each group. Only top level groups get
- * their own template.
- **/
+// Recursively generates a template for each group. Only top level groups get
+// their own template.
 const templates = (structure, substructure) => {
   // Top level => continue recursion
   if (substructure instanceof Array && substructure[0].depth === 1) {
@@ -35,13 +32,13 @@ const templates = (structure, substructure) => {
   }
 }
 
-module.exports = () => {
-  const structure = require('./structure')()
+export default () => {
+  const structure = createStructure()
 
   log('start')
 
-  if (!fs.existsSync(config.dist)) {
-    fs.mkdirSync(config.dist)
+  if (!existsSync(config.dist)) {
+    mkdirSync(config.dist)
   }
 
   if (config.single) {

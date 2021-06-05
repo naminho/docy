@@ -1,13 +1,13 @@
-const remark = require('remark')
-const recommended = require('remark-preset-lint-recommended')
-const html = require('remark-html')
-const slug = require('remark-slug')
-const headings = require('remark-autolink-headings')
-const behead = require('remark-behead')
-const highlight = require('remark-highlight.js')
-const report = require('vfile-reporter')
+import remark from 'remark'
+import recommended from 'remark-preset-lint-recommended'
+import html from 'remark-html'
+import slug from 'remark-slug'
+import headings from 'remark-autolink-headings'
+import behead from 'remark-behead'
+import highlight from 'remark-highlight.js'
+import { reporter } from 'vfile-reporter'
 
-module.exports = (content, depth) => {
+export default (content, depth) => {
   const parsed = remark()
     .use(recommended)
     .use(slug)
@@ -20,7 +20,7 @@ module.exports = (content, depth) => {
     .processSync(content)
 
   if (parsed.messages.length) {
-    console.log(`\n\n${report(parsed)}`)
+    console.log(`\n\n${reporter(parsed)}`)
   }
 
   return parsed.contents

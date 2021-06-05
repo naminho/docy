@@ -1,31 +1,31 @@
-const fs = require('fs')
-const path = require('path')
-const ejs = require('ejs')
-const minify = require('html-minifier').minify
-const log = require('./log')
-const config = require('./../config')
-const style = require('./styles')()
+import { writeFileSync } from 'fs'
+import { join } from 'path'
+import ejs from 'ejs'
+import { minify } from 'html-minifier'
+import log from './log.js'
+import config from '../config.js'
+import style from './styles.js'
 
-/**
- * Minify the generated template and write it's contents to the approprite file.
- **/
+// Minify the generated template and write it's contents to the approprite file.
 const writeTemplate = (error, result, structure) => {
+  let content = result
   if (error) {
-    return log('template', error)
+    log('template', error)
+    return
   }
 
   if (config.minify) {
-    result = minify(result, {
+    content = minify(content, {
       collapseWhitespace: true,
     })
   }
 
   const distFileName = (structure[0] && structure[0].dist) || config.result
 
-  fs.writeFileSync(path.join(config.dist, distFileName), result)
+  writeFileSync(join(config.dist, distFileName), content)
 }
 
-module.exports = (structure, substructure) =>
+export default (structure, substructure) =>
   ejs.renderFile(
     config.templatePath,
     {
@@ -33,7 +33,7 @@ module.exports = (structure, substructure) =>
       footer: config.footer,
       structure,
       substructure: substructure || structure,
-      style,
+      style: style(),
     },
     {},
     (error, result) => writeTemplate(error, result, substructure || structure)

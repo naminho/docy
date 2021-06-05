@@ -1,13 +1,11 @@
-const capitalizeTitle = require('capitalize-title')
+import capitalizeTitle from 'capitalize-title'
+
 // NOTE Avoid the g flag, as it would store the lastIndex.
 const removeExtensionRegex = /(.*)\.[^.]+$/
 const removeOrderingRegex = /[^a-zA-Z]+(.+)/
 
-/**
- * Removes an optional extension for file names
- *
- * intro.md => intro
- **/
+// Removes an optional extension for file names
+// intro.md => intro
 const removeExtension = (name) => {
   const regexResult = removeExtensionRegex.exec(name)
 
@@ -18,11 +16,8 @@ const removeExtension = (name) => {
   return name
 }
 
-/**
- * Removes the ordering in front.
- *
- * 1-intro => intro
- **/
+// Removes the ordering in front.
+// 1-intro => intro
 const removeOrdering = (name) => {
   const regexResult = removeOrderingRegex.exec(name)
 
@@ -33,20 +28,18 @@ const removeOrdering = (name) => {
   return name
 }
 
-/**
- * Removes the the characters used to help with ordering.
- * 1-intro => intro
- *
- * Replaces dashes with spaces.
- * hello-world => hello world
- *
- * Capitalizes the title
- * hello-to-the-world => Hello to the World
- **/
-module.exports = (name) => {
-  name = removeOrdering(name)
-  name = removeExtension(name)
-  name = name.replace('-', ' ')
+// Removes the the characters used to help with ordering.
+// 1-intro => intro
+//
+// Replaces dashes with spaces.
+// hello-world => hello world
+//
+// Capitalizes the title
+// hello-to-the-world => Hello to the World
+export default (name) => {
+  let cleanName = removeOrdering(name)
+  cleanName = removeExtension(cleanName)
+  cleanName = cleanName.replace('-', ' ')
 
-  return capitalizeTitle(name)
+  return capitalizeTitle(cleanName)
 }

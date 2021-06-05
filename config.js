@@ -1,17 +1,66 @@
-const contentDirectory = process.cwd()
-const docyDirectory = __dirname
+import { existsSync, readFileSync } from 'fs'
+import { resolve, join, basename } from 'path'
+import { createRequire } from 'module'
 
-const path = require('path')
+const require = createRequire(import.meta.url)
+
+const docyDirectory = (() => {
+  const nodeModulesPath = 'node_modules/docy'
+  const pathInNodeModules = join(process.cwd(), nodeModulesPath)
+
+  if (existsSync(pathInNodeModules)) {
+    return pathInNodeModules
+  }
+
+  if (process.env._) {
+    const npxPath = process.env._.replace('.bin/docy', 'docy')
+
+    if (existsSync(npxPath)) {
+      return npxPath
+    }
+  }
+
+  const resolvePath = require.resolve('docy')
+
+  if (resolvePath && resolvePath.includes(nodeModulesPath)) {
+    const resolvePathWithoutFile =
+      resolvePath.split(nodeModulesPath)[0] + nodeModulesPath
+
+    if (existsSync(resolvePathWithoutFile)) {
+      return resolvePathWithoutFile
+    }
+  }
+
+  console.error('Failed to locate project package.')
+  process.exit(0)
+  return null
+})()
+
+export const packageContents = (() => {
+  let pkg = {}
+  try {
+    pkg = JSON.parse(
+      readFileSync(resolve(process.cwd(), 'package.json'), 'utf8')
+    )
+  } catch (error) {
+    const parentFolderName = basename(process.cwd())
+    console.error(
+      `No package.json found in ${process.cwd()}, using name "${parentFolderName}" as fallback.`
+    )
+    pkg = {
+      // Use current directory as package name.
+      name: parentFolderName,
+    }
+  }
+  return pkg
+})()
+
 const exmplPath = require.resolve('exmpl')
-let package = {}
-try {
-  package = require(path.resolve(contentDirectory, 'package.json'))
-} catch (error) {}
-const options = package.docy || {}
+const options = packageContents.docy || {}
 
 const defaults = {
   styles: [
-    path.join(exmplPath, '../styles-opt-out-no-layout.css'),
+    join(exmplPath, '../styles-opt-out-no-layout.css'),
     'styles/layout.css',
     'styles/header.css',
     'styles/navigation.css',
@@ -21,9 +70,9 @@ const defaults = {
   result: 'index.html',
   template: 'template.html',
   dist: 'dist',
-  contentDirectory,
+  contentDirectory: process.cwd(),
   docyDirectory,
-  title: package.name,
+  title: packageContents.name,
   footer: `Documentation generated with <a href="http://github.com/tobua/docy">docy</a>.`,
   single: true,
   minify: true,
@@ -33,7 +82,7 @@ const defaults = {
 const config = Object.assign(defaults, options)
 
 // Derived properties
-config.templatePath = path.resolve(docyDirectory, config.template)
+config.templatePath = resolve(docyDirectory, config.template)
 if (
   !config.single &&
   config.result.indexOf(config.fileNamePlaceholder) === -1
@@ -44,4 +93,4 @@ if (
     config.result.substr(config.result.lastIndexOf('.'), config.result.length)
 }
 
-module.exports = config
+export default config

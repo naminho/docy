@@ -1,6 +1,6 @@
-const inquirer = require('inquirer')
+import inquirer from 'inquirer'
 
-module.exports = (watch, open) => {
+export default async (watch, open) => {
   const questions = []
 
   if (!open) {
@@ -20,22 +20,5 @@ module.exports = (watch, open) => {
     })
   }
 
-  const promise = new Promise((resolve, reject) => {
-    inquirer.prompt(questions).then(
-      (answers) => {
-        if (watch) {
-          answers.watch = watch
-        }
-
-        if (open) {
-          answers.open = open
-        }
-
-        resolve(answers)
-      },
-      (error) => reject(error)
-    )
-  })
-
-  return promise
+  return inquirer.prompt(questions)
 }

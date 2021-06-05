@@ -1,36 +1,30 @@
-const fs = require('fs')
-const path = require('path')
-const watch = require('watch')
-const config = require('./../config')
-const render = require('./render')
+import { watchFile } from 'fs'
+import { resolve } from 'path'
+import chokidar from 'chokidar'
+import config from '../config.js'
+import render from './render.js'
 
-const watchFile = (file) => {
-  fs.watchFile(file, (curr, prev) => {
-    if (!(prev === null && curr === null)) {
+const watchTemplate = (file) =>
+  watchFile(file, (current, previous) => {
+    if (!(current === null && previous === null)) {
       render()
     }
   })
-}
 
 const watchDirectory = (directory) => {
-  watch.watchTree(
-    directory,
-    {
-      ignoreDirectoryPattern: new RegExp(`${config.dist}|node_modules`, 'i'),
-    },
-    (f, curr, prev) => {
-      if (!(typeof f == 'object' && prev === null && curr === null)) {
-        render()
-      }
-    }
-  )
+  chokidar
+    .watch(directory, {
+      ignoreInitial: true,
+      ignored: new RegExp(`${config.dist}|node_modules`, 'i'),
+    })
+    .on('all', render)
 }
 
-module.exports = () => {
+export default () => {
   // User directory
   watchDirectory(config.contentDirectory)
   // Development directories
-  watchDirectory(path.resolve(config.docyDirectory, 'styles'))
+  watchDirectory(resolve(config.docyDirectory, 'styles'))
   // Template
-  watchFile(config.templatePath)
+  watchTemplate(config.templatePath)
 }

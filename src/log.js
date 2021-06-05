@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+import chalk from 'chalk'
 
 const messages = {
   start: {
@@ -28,7 +28,7 @@ const getText = (message, args) => {
   return message.text
 }
 
-module.exports = (key, error, ...args) => {
+export default (key, error, ...args) => {
   const message = messages[key]
 
   if (message.type === 'info') {

@@ -1,12 +1,10 @@
-const unified = require('unified')
-const markdown = require('remark-parse')
-const log = require('./log')
-const readable = require('./utils/readable')
+import unified from 'unified'
+import markdown from 'remark-parse'
+import log from './log.js'
+import readable from './utils/readable.js'
 
-/**
- * Get the main heading of a markdown file.
- **/
-module.exports = (content, file) => {
+// Get the main heading of a markdown file.
+export default (content, file) => {
   // Get an MDAST from the markdown file: https://github.com/syntax-tree/mdast
   const tree = unified().use(markdown).parse(content)
 

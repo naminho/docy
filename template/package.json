@@ -1,0 +1,11 @@
+{
+  "name": "docy-starter",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build"
+  },
+  "dependencies": {
+    "docy": "^2.0.0"
+  }
+}

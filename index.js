@@ -1,44 +1,44 @@
 #!/usr/bin/env node
-
-const contentDirectory = process.cwd()
-
-const path = require('path')
-const { program } = require('commander')
-let package = {}
-try {
-  package = require(path.resolve(contentDirectory, 'package.json'))
-} catch (error) {}
-const render = require('./src/render')
-const prompt = require('./src/prompt')
-const watch = require('./src/watch')
-const open = require('./src/open')
+import { program } from 'commander'
+import render from './src/render.js'
+import prompt from './src/prompt.js'
+import watch from './src/watch.js'
+import open from './src/open.js'
+import { packageContents } from './config.js'
 
 // Generate CLI
 program
-  .version(package.version || '0.0.0')
+  .version(packageContents.version || '0.0.0')
   .option('-b, --build', 'Build only, no watch and open.')
   .option('-w, --watch', 'Watch filesystem for changes.')
   .option('-o, --open', 'Open the generated documentation in the browser.')
   .parse(process.argv)
 
-if (program.build) {
-  return render()
+const options = program.opts()
+
+if (options.build) {
+  render()
+  process.exit(1)
+}
+
+let answers = {
+  watch: false,
+  open: false,
 }
 
 // Ask if watch and open are desired, then render.
-const promptmise = prompt(program.watch, program.open)
+try {
+  answers = await prompt(options.watch, options.open)
+} catch (error) {
+  console.error('Failed to prompt for watch and open.')
+}
 
-promptmise.then(
-  (answers) => {
-    if (answers.watch) {
-      watch()
-    }
+if (options.watch || answers.watch) {
+  watch()
+}
 
-    render()
+render()
 
-    if (answers.open) {
-      open()
-    }
-  },
-  () => {}
-)
+if (options.open || answers.open) {
+  open()
+}
