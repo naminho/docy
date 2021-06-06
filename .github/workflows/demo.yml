@@ -24,6 +24,7 @@ jobs:
           npm run build --prefix demo/multiple
           npm install --prefix demo/advanced
           npm run build --prefix demo/advanced
+          rm -rf demo/.gitignore
           rm -rf demo/minimal/node_modules demo/minimal/package-lock.json
           rm -rf demo/simple/node_modules demo/simple/package-lock.json
           rm -rf demo/multiple/node_modules demo/multiple/package-lock.json
@@ -33,4 +34,3 @@ jobs:
         with:
           branch: demo
           folder: demo
-          clean: false
