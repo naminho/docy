@@ -1,15 +1,14 @@
 {
-  "name": "simple",
+  "name": "minimal",
   "scripts": {
     "start": "docy",
-    "develop": "docy --watch --open",
     "build": "docy --build",
-    "postinstall": "synec --no-watch"
+    "postinstall": "synec"
   },
   "localDependencies": {
     "docy": "../.."
   },
   "devDependencies": {
-    "synec": "^0.1.16"
+    "synec": "^0.2.0"
   }
 }

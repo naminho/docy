@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
-examples/*/package-lock.json
-examples/*/dist
+demo/*/package-lock.json
+demo/*/dist
 .DS_Store
 jsconfig.json

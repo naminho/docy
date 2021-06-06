@@ -13,23 +13,23 @@ jobs:
         with:
           node-version: '14'
           check-latest: true
-      - name: Build all examples 🛠️
+      - name: Build demo 🛠️
         run: |
           npm install
-          npm install --prefix examples/minimal
-          npm run build --prefix examples/minimal
-          npm install --prefix examples/simple
-          npm run build --prefix examples/simple
-          npm install --prefix examples/multiple
-          npm run build --prefix examples/multiple
-          npm install --prefix examples/advanced
-          npm run build --prefix examples/advanced
-          rm -rf examples/minimal/node_modules examples/minimal/package-lock.json
-          rm -rf examples/simple/node_modules examples/simple/package-lock.json
-          rm -rf examples/multiple/node_modules examples/multiple/package-lock.json
-          rm -rf examples/advanced/node_modules examples/advanced/package-lock.json
+          npm install --prefix demo/minimal
+          npm run build --prefix demo/minimal
+          npm install --prefix demo/simple
+          npm run build --prefix demo/simple
+          npm install --prefix demo/multiple
+          npm run build --prefix demo/multiple
+          npm install --prefix demo/advanced
+          npm run build --prefix demo/advanced
+          rm -rf demo/minimal/node_modules demo/minimal/package-lock.json
+          rm -rf demo/simple/node_modules demo/simple/package-lock.json
+          rm -rf demo/multiple/node_modules demo/multiple/package-lock.json
+          rm -rf demo/advanced/node_modules demo/advanced/package-lock.json
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: demo
-          folder: examples
+          folder: demo
