@@ -1,7 +1,7 @@
 {
   "name": "docy",
   "description": "Documentation generator for your plugin, library or framework.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": "github:tobua/docy",
   "homepage": "https://tobua.github.io/docy",
   "license": "MIT",

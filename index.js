@@ -18,7 +18,7 @@ const options = program.opts()
 
 if (options.build) {
   render()
-  process.exit(1)
+  process.exit(0)
 }
 
 let answers = {
