@@ -1,0 +1,19 @@
+{
+  "name": "advanced",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build",
+    "postinstall": "synec"
+  },
+  "docy": {
+    "title": "Advanced Example",
+    "single": false
+  },
+  "localDependencies": {
+    "docy": "../.."
+  },
+  "devDependencies": {
+    "synec": "^0.2.0"
+  }
+}

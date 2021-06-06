@@ -1,0 +1,18 @@
+{
+  "name": "multiple",
+  "scripts": {
+    "start": "docy",
+    "develop": "docy --watch --open",
+    "build": "docy --build",
+    "postinstall": "synec"
+  },
+  "docy": {
+    "single": false
+  },
+  "localDependencies": {
+    "docy": "../.."
+  },
+  "devDependencies": {
+    "synec": "^0.2.0"
+  }
+}

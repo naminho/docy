@@ -1,0 +1,14 @@
+{
+  "name": "minimal",
+  "scripts": {
+    "start": "docy",
+    "build": "docy --build",
+    "postinstall": "synec"
+  },
+  "localDependencies": {
+    "docy": "../.."
+  },
+  "devDependencies": {
+    "synec": "^0.2.0"
+  }
+}
